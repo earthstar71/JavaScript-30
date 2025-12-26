@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>📐Scoped CSS Variables and JS</title>
+  <title>📐Use & Update CSS Variables with JS</title>
   <link rel="icon" href="https://fav.farm/📶" />
 </head>
 
@@ -11,26 +11,52 @@
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
-    <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <div>
+      <label for="spacing">Spacing:</label>
+      <input id="spacing" type="range" name="spacing" min="10" max="200" value="75" data-sizing="px">
+    </div>
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <div>
+      <label for="blur">Blur:</label>
+      <input id="blur" type="range" name="blur" min="0" max="25" value="1" data-sizing="px">
+    </div>
 
-    <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
+    <div>
+      <label for="base">Base Color</label>
+      <input id="base" type="color" name="base" value="#44d6c7">
+    </div>
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="./image.png" id="main-image">
 
   <style>
+    :root {
+      --base: #43d6ca;
+      --spacing: 25px;
+      --blur: 1px;
+    }
+
+    #main-image {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur))
+    }
+
+    .hl {
+      color: var(--base);
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
 
     body {
+      padding: 0px;
       text-align: center;
-      background: #193549;
+      /* TODO: Fix background image */
+      background: url("./background.png");
+      /* background: #039be6; */
+      background-size: cover;
       color: white;
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
@@ -38,7 +64,26 @@
     }
 
     .controls {
+      display: flex;
+      width: 100%;
+      justify-content: center;
       margin-bottom: 50px;
+    }
+
+    #spacing,
+    #blur,
+    #base {
+      accent-color: #d286ed;
+    }
+
+    #spacing,
+    #blur {
+      height: 50%;
+      margin-right: 1rem;
+    }
+
+    #base {
+      height: 42px;
     }
 
     input {
@@ -47,6 +92,19 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+    function handleUpdate() {
+      // console.log(this.dataset);
+
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+      // const body = document.querySelector('body')
+      // body.style.padding = '0px'
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
