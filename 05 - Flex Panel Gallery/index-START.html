@@ -29,11 +29,17 @@
     }
 
     .panels {
+      display: flex;
       min-height: 100vh;
       overflow: hidden;
     }
 
     .panel {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       background: #6B0F9C;
       box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
       color: white;
@@ -51,11 +57,11 @@
     }
 
     .panel1 {
-      background-image: url("./img-1");
+      background-image: url("./img-1.jpg");
     }
 
     .panel2 {
-      background-image: url("./img-2.png");
+      background-image: url("./img-2.webp");
     }
 
     .panel3 {
@@ -63,18 +69,39 @@
     }
 
     .panel4 {
-      background-image: url("./img-4.png");
+      background-image: url("./img-4.jpg");
     }
 
     .panel5 {
-      background-image: url("./img-5.png");
+      background-image: url("./img-5.jpg");
     }
 
-    /* Flex Children */
+    /* Flex Items */
     .panel>* {
+      display: flex;
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      /* border: 1px solid red; */
+      flex: 1 0 auto;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel>*:first-child {
+      transform: translateY(-100%);
+    }
+
+    .panel.open-active>*:first-child {
+      transform: translateY(0);
+    }
+
+    .panel>*:last-child {
+      transform: translateY(100%);
+    }
+
+    .panel.open-active>*:last-child {
+      transform: translateY(0);
     }
 
     .panel p {
@@ -89,6 +116,7 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
   </style>
@@ -102,28 +130,42 @@
     </div>
     <div class="panel panel2">
       <p>Give</p>
-      <p>Take</p>
+      <p>Keep</p>
       <p>Receive</p>
     </div>
     <div class="panel panel3">
       <p>Experience</p>
-      <p>It</p>
+      <p>Exploring</p>
       <p>Today</p>
     </div>
     <div class="panel panel4">
       <p>Give</p>
-      <p>All</p>
+      <p>New</p>
       <p>You can</p>
     </div>
     <div class="panel panel5">
       <p>Life</p>
-      <p>In</p>
+      <p>Places</p>
       <p>Motion</p>
     </div>
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel');
 
+    function toggleOpen() {
+      console.log('Toggled class \"open\" on panel')
+      this.classList.toggle('open');
+    }
+    function toggleActive(e) {
+      console.log(e.propertyName);
+      if (e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
   </script>
 
 
