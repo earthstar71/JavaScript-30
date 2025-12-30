@@ -153,7 +153,13 @@
   <script>
     const panels = document.querySelectorAll('.panel');
 
-    function toggleOpen() {
+    function toggleOpen(currentPanel) {
+      // const currentPanel = ;
+      panels.forEach(panel => {
+        if (panel != currentPanel) {
+          panel.classList.remove('open');
+        }
+      })
       console.log('Toggled class \"open\" on panel')
       this.classList.toggle('open');
     }
@@ -167,8 +173,6 @@
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
   </script>
-
-
 
 </body>
 
