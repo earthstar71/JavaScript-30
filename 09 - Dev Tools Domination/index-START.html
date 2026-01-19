@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
+  <title>💻 Console Tricks!</title>
+  <link rel="icon" href="https://fav.farm/⌨" />
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const dogs = [{ name: 'Spot', age: 2 }, { name: 'rover', age: 8 }];
 
     function makeGreen() {
       const p = document.querySelector('p');
@@ -19,29 +21,77 @@
     }
 
     // Regular
+    console.log('Hello World!');
 
     // Interpolated
+    console.log('Hello I am a %s string!', '🆒');
 
     // Styled
+    console.log('%c I am some bright text', 'color:aquamarine; font-size:50px; background:yellow; text-shadow: 10px 10px 0 lightgreen')
 
     // warning!
+    console.warn('FIX YOUR CODE BEFORE SOMETHING GOES WRONG!!');
 
     // Error :|
+    console.error('OOOPS!');
 
     // Info
+    console.info('ℹ️ Crocodiles eat 3-4 people per year');
 
     // Testing
+    const p = document.querySelector('p');
 
-    // clearing
+    console.assert(p.classList.contains("blahblahblah"), 'Ln. \n\n--------------------------\n\nThat\'s not true!\n\n------ASSERTION ENDS------\n\n');
+
+    // // clearing
+
+    // console.clear();
+
+    console.log("\n\n--------------------------------------------\n\n")
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // console.clear();
+    console.log("\n\n--------------------------------------------\n\n")
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
 
+    console.count('Daisies');
+    console.count('Daisies');
+    console.count('Roses');
+    console.count('Roses');
+    console.count('Daisies');
+    console.count('Roses');
+    console.count('Daisies');
+    console.count('Roses');
+    console.count('Roses');
+    console.count('Roses');
+    console.count('Roses');
+    console.count('Roses');
+
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+
+    console.table(dogs);
 
   </script>
 </body>
+
 </html>
