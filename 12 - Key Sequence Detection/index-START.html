@@ -11,6 +11,30 @@
 <body>
   <script>
 
+    const keysPressed = [];
+    const secretCode = 'secret';
+
+    window.addEventListener('keyup', (e) => {
+
+      console.log(e.key);
+
+      keysPressed.push(e.key);
+
+
+      spliceArg1 = (-secretCode.length - 1);
+      spliceArg2 = (keysPressed.length - secretCode.length);
+
+      keysPressed.splice(spliceArg1, spliceArg2);
+
+      if (keysPressed.join('').includes(secretCode)) {
+        console.log("DING DING!");
+        console.log("You cracked the code!");
+        cornify_add();
+      }
+      console.log(keysPressed);
+
+    });
+
   </script>
 </body>
 
