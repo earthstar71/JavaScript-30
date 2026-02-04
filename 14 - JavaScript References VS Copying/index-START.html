@@ -11,14 +11,28 @@
 
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    console.log("\n------------------------------------\n", age, age2);
+    age = 200;
+    console.log(age, age2);
 
+    let name = "Me";
+    let name2 = name;
+    console.log("\n------------------------------------\n", name, name2);
+    name = "Two Me's!";
+    console.log(name, name2);
 
     // Let's say we have an array
-    const players = ['Me', 'Anonymous', 'No-name', 'Someone else'];
+    const people = ['Me', 'Anonymous', 'No-name', 'Someone else'];
 
     // and we want to make a copy of it.
+    const team = people;
 
+    console.log("\n------------------------------------\n", people, team);
     // You might think we can just do something like this:
+    team[3] = 'Person';
+    console.log("\n------------------------------------\n", team, people);
 
     // however what happens when we update that array?
 
@@ -29,12 +43,20 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
+    const team2 = people.slice();
+    console.log(team2);
+    team2[3] = 'Person';
+    console.log("\n------------------------------------\n", team2, team, people);
 
     // one way
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(people);
+    console.log("\n------------------------------------\n", team3, team2, team, people);
 
     // or use the new ES6 Spread
+    const team4 = [...people];
+    console.log("\n------------------------------------\n", team4, team3, team2, team, people);
 
     // now when we update it, the original one isn't changed
 
@@ -42,7 +64,7 @@
 
     // with Objects
     const person = {
-      name: 'Wes Bos',
+      name: 'Me Mylastname',
       age: 80
     };
 
